@@ -111,6 +111,9 @@ public class PermissionEditCommands {
 						query
 				));
 				msg.build();
+			} else {
+				msg.appendContent(String.format("Unable to find '%s'", query));
+				msg.build();
 			}
 		}
 	}
