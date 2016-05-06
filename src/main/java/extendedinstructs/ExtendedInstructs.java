@@ -1,8 +1,8 @@
 package extendedinstructs;
 
-import extendedinstructs.command.GeneralCommands;
-import instructabilty.Instructables;
-import instructabilty.command.CommandRegistry;
+import extendedinstructs.commands.permissions.PermissionCommand;
+import instructability.Instructables;
+import instructability.command.CommandRegistry;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.modules.IModule;
 
@@ -15,7 +15,7 @@ public class ExtendedInstructs implements IModule {
 		ExtendedInstructs.instance = this;
 
 		CommandRegistry reg = Instructables.getRegistry();
-		reg.registerCommand(GeneralCommands.getModulesCommand());
+		reg.registerCommand(new PermissionCommand());
 		return true;
 	}
 
@@ -25,7 +25,7 @@ public class ExtendedInstructs implements IModule {
 
 	@Override
 	public String getName() {
-		return "ExtendedInstructs";
+		return getClass().getPackage().getImplementationTitle();
 	}
 
 	@Override
@@ -35,12 +35,12 @@ public class ExtendedInstructs implements IModule {
 
 	@Override
 	public String getVersion() {
-		return "0.0.1";
+		return getClass().getPackage().getImplementationVersion();
 	}
 
 	@Override
 	public String getMinimumDiscord4JVersion() {
-		return "2.4.6";
+		return "2.4.0";
 	}
 
 	public static ExtendedInstructs getInstance() {

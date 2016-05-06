@@ -4,7 +4,7 @@
 
 	<groupId>kaioru.github.io</groupId>
 	<artifactId>ExtendedInstructs</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>ExtendedInstructs</name>
@@ -17,6 +17,26 @@
 		<maven.compiler.testTarget>1.8</maven.compiler.testTarget>
 		<maven.compiler.testSource>1.8</maven.compiler.testSource>
 	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+						<manifestEntries>
+							<module-requires>instructability.Instructability</module-requires>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 	<repositories>
 		<repository>
@@ -43,8 +63,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.github.Kaioru</groupId>
-			<artifactId>Instructabilty</artifactId>
-			<version>0.0.1</version>
+			<artifactId>Instructability</artifactId>
+			<version>0.2.0-pre.2</version>
 		</dependency>
 	</dependencies>
 </project>
