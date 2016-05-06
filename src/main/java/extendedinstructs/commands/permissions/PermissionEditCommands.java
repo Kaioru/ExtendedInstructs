@@ -15,7 +15,7 @@ public class PermissionEditCommands {
 
 	@AnnotatedCommand(
 			name = "check",
-			desc = "Checks wether you have the specified permission"
+			desc = "Checks whether you have the specified permission"
 	)
 	public void cmdPermissionCheck(MessageReceivedEvent event, MessageBuilder msg, LinkedList<String> args) throws Exception {
 		String query = args.removeFirst();
@@ -26,7 +26,7 @@ public class PermissionEditCommands {
 					msg.appendContent(String.format("Permissions verification for '%s' succeeded.", query));
 					msg.build();
 				})
-		.execute(event, msg, args);
+				.execute(event, msg, args);
 	}
 
 	@AnnotatedCommand(
