@@ -74,7 +74,7 @@ public class PermissionEditCommands {
 				.getGuild()
 				.getUsers()
 				.stream()
-				.filter(u -> u.getName().equals(query))
+				.filter(u -> u.getName().equalsIgnoreCase(query))
 				.findFirst();
 
 		if (user.isPresent()) {
@@ -95,7 +95,7 @@ public class PermissionEditCommands {
 					.getGuild()
 					.getRoles()
 					.stream()
-					.filter(r -> r.getName().equals(query))
+					.filter(r -> r.getName().equalsIgnoreCase(query))
 					.findFirst();
 
 			if (role.isPresent()) {
