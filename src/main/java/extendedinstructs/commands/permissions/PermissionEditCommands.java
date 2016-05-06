@@ -2,6 +2,7 @@ package extendedinstructs.commands.permissions;
 
 import instructability.Instructables;
 import instructability.command.AnnotatedCommand;
+import instructability.command.CommandBuilder;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.IRole;
 import sx.blah.discord.handle.obj.IUser;
@@ -11,6 +12,19 @@ import java.util.LinkedList;
 import java.util.Optional;
 
 public class PermissionEditCommands {
+
+	@AnnotatedCommand(name = "check")
+	public void cmdPermissionCheck(MessageReceivedEvent event, MessageBuilder msg, LinkedList<String> args) throws Exception {
+		String query = args.removeFirst();
+
+		new CommandBuilder("internal-check")
+				.permission(query)
+				.build((e, m, a) -> {
+					msg.appendContent(String.format("Permissions verification for '%s' succeeded.", query));
+					msg.build();
+				})
+		.execute(event, msg, args);
+	}
 
 	@AnnotatedCommand(name = "add")
 	public void cmdPermissionAdd(MessageReceivedEvent event, MessageBuilder msg, LinkedList<String> args) throws Exception {
