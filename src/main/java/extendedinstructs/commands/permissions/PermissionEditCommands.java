@@ -13,7 +13,10 @@ import java.util.Optional;
 
 public class PermissionEditCommands {
 
-	@AnnotatedCommand(name = "check")
+	@AnnotatedCommand(
+			name = "check",
+			desc = "Checks wether you have the specified permission"
+	)
 	public void cmdPermissionCheck(MessageReceivedEvent event, MessageBuilder msg, LinkedList<String> args) throws Exception {
 		String query = args.removeFirst();
 
@@ -26,7 +29,10 @@ public class PermissionEditCommands {
 		.execute(event, msg, args);
 	}
 
-	@AnnotatedCommand(name = "add")
+	@AnnotatedCommand(
+			name = "add",
+			desc = "Gives the User/Role a specified permission"
+	)
 	public void cmdPermissionAdd(MessageReceivedEvent event, MessageBuilder msg, LinkedList<String> args) throws Exception {
 		String query = args.removeFirst();
 		String perms = args.removeFirst();
@@ -79,7 +85,10 @@ public class PermissionEditCommands {
 		}
 	}
 
-	@AnnotatedCommand(name = "remove")
+	@AnnotatedCommand(
+			name = "remove",
+			desc = "Takes from User/Role a specified permission"
+	)
 	public void cmdPermissionRemove(MessageReceivedEvent event, MessageBuilder msg, LinkedList<String> args) throws Exception {
 		String query = args.removeFirst();
 		String perms = args.removeFirst();
