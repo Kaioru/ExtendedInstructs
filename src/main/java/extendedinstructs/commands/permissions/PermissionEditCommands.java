@@ -1,8 +1,8 @@
 package extendedinstructs.commands.permissions;
 
-import instructability.Instructables;
-import instructability.command.AnnotatedCommand;
-import instructability.command.CommandBuilder;
+import com.github.kaioru.instructability.Instructables;
+import com.github.kaioru.instructability.discord4j.Discord4JAnnotatedCommand;
+import com.github.kaioru.instructability.discord4j.Discord4JCommandBuilder;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.IRole;
 import sx.blah.discord.handle.obj.IUser;
@@ -13,27 +13,36 @@ import java.util.Optional;
 
 public class PermissionEditCommands {
 
-	@AnnotatedCommand(
+	@Discord4JAnnotatedCommand(
+			name = "demo",
+			desc = "This is a demo!"
+	)
+	public void cmdDemo(LinkedList<String> args, MessageReceivedEvent event, MessageBuilder msg) throws Exception {
+		msg.appendContent("Hello world!")
+				.build();
+	}
+
+	@Discord4JAnnotatedCommand(
 			name = "check",
 			desc = "Checks whether you have the specified permission"
 	)
-	public void cmdPermissionCheck(MessageReceivedEvent event, MessageBuilder msg, LinkedList<String> args) throws Exception {
+	public void cmdPermissionCheck(LinkedList<String> args, MessageReceivedEvent event, MessageBuilder msg) throws Exception {
 		String query = args.removeFirst();
 
-		new CommandBuilder("internal-check")
+		new Discord4JCommandBuilder("internal-check")
 				.permission(query)
 				.build((e, m, a) -> {
 					msg.appendContent(String.format("Permissions verification for '%s' succeeded.", query));
 					msg.build();
 				})
-				.execute(event, msg, args);
+				.execute(args, event, msg);
 	}
 
-	@AnnotatedCommand(
+	@Discord4JAnnotatedCommand(
 			name = "add",
-			desc = "Gives the User/Role a specified permission"
+			desc = "Gives User/Role a specified permission"
 	)
-	public void cmdPermissionAdd(MessageReceivedEvent event, MessageBuilder msg, LinkedList<String> args) throws Exception {
+	public void cmdPermissionAdd(LinkedList<String> args, MessageReceivedEvent event, MessageBuilder msg) throws Exception {
 		String query = args.removeFirst();
 		String perms = args.removeFirst();
 
@@ -48,8 +57,7 @@ public class PermissionEditCommands {
 			IUser u = user.get();
 
 			Instructables.getPermissionRegistry()
-					.getForGuild(event.getMessage().getGuild().getID())
-					.getUserPermissions(u.getID())
+					.getPermissions(event.getMessage().getGuild().getID() + ":" + u.getID())
 					.add(perms);
 			msg.appendContent(String.format(
 					"Successfully added '%s' permissions to user '%s'",
@@ -69,8 +77,7 @@ public class PermissionEditCommands {
 				IRole r = role.get();
 
 				Instructables.getPermissionRegistry()
-						.getForGuild(event.getMessage().getGuild().getID())
-						.getRolePermissions(r.getID())
+						.getPermissions(event.getMessage().getGuild().getID() + ":" + r.getID())
 						.add(perms);
 				msg.appendContent(String.format(
 						"Successfully added '%s' permissions to role '%s'",
@@ -85,11 +92,11 @@ public class PermissionEditCommands {
 		}
 	}
 
-	@AnnotatedCommand(
+	@Discord4JAnnotatedCommand(
 			name = "remove",
 			desc = "Takes from User/Role a specified permission"
 	)
-	public void cmdPermissionRemove(MessageReceivedEvent event, MessageBuilder msg, LinkedList<String> args) throws Exception {
+	public void cmdPermissionRemove(LinkedList<String> args, MessageReceivedEvent event, MessageBuilder msg) throws Exception {
 		String query = args.removeFirst();
 		String perms = args.removeFirst();
 
@@ -104,8 +111,7 @@ public class PermissionEditCommands {
 			IUser u = user.get();
 
 			Instructables.getPermissionRegistry()
-					.getForGuild(event.getMessage().getGuild().getID())
-					.getUserPermissions(u.getID())
+					.getPermissions(event.getMessage().getGuild().getID() + ":" + u.getID())
 					.remove(perms);
 			msg.appendContent(String.format(
 					"Successfully removed '%s' permissions to user '%s'",
@@ -125,8 +131,7 @@ public class PermissionEditCommands {
 				IRole r = role.get();
 
 				Instructables.getPermissionRegistry()
-						.getForGuild(event.getMessage().getGuild().getID())
-						.getRolePermissions(r.getID())
+						.getPermissions(event.getMessage().getGuild().getID() + ":" + r.getID())
 						.remove(perms);
 				msg.appendContent(String.format(
 						"Successfully removed '%s' permissions to role '%s'",

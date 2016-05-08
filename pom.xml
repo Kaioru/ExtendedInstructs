@@ -30,7 +30,7 @@
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 						</manifest>
 						<manifestEntries>
-							<module-requires>instructability.Instructability</module-requires>
+							<module-requires>com.github.kaioru.instructability.discord4j.InstructabilityModule</module-requires>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -63,8 +63,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.github.Kaioru</groupId>
-			<artifactId>Instructability</artifactId>
-			<version>0.2.0-pre.2</version>
+			<artifactId>instructability</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -1,8 +1,8 @@
 package extendedinstructs;
 
+import com.github.kaioru.instructability.Instructables;
+import com.github.kaioru.instructability.command.CommandRegistry;
 import extendedinstructs.commands.permissions.PermissionCommand;
-import instructability.Instructables;
-import instructability.command.CommandRegistry;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.modules.IModule;
 

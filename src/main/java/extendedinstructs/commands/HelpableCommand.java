@@ -1,11 +1,11 @@
 package extendedinstructs.commands;
 
-import instructability.command.SimpleCommand;
 
-public abstract class HelpableCommand extends SimpleCommand {
+import com.github.kaioru.instructability.discord4j.Discord4JCommand;
+
+public abstract class HelpableCommand extends Discord4JCommand {
 
 	public HelpableCommand() {
-		addHelperCommands();
 	}
 
 }

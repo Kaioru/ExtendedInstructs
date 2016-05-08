@@ -4,12 +4,19 @@ import extendedinstructs.commands.HelpableCommand;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.util.MessageBuilder;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 
 public class PermissionCommand extends HelpableCommand {
 
 	public PermissionCommand() {
-		registerCommands(new PermissionEditCommands());
+		try {
+			registerCommands(new PermissionEditCommands());
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -23,7 +30,7 @@ public class PermissionCommand extends HelpableCommand {
 	}
 
 	@Override
-	public void onExecute(MessageReceivedEvent event, MessageBuilder msg, LinkedList<String> args) throws Exception {
+	public void execute(LinkedList<String> linkedList, MessageReceivedEvent messageReceivedEvent, MessageBuilder messageBuilder) throws Exception {
 
 	}
 
